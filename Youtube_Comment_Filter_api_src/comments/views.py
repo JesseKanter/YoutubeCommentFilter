@@ -26,9 +26,10 @@ def predicted_df(start_time,add_time,comments,tran):
     return comments.sort_values(by='sim_score',ascending=False).head(3)
 
 
-def comments():
-    tran= select_script_transcript(video_id_input)
-    comments= get_comments_df(video_id_input)
+def comments(request):
+    video_id=request.GET['video_id']
+    tran= get_transcript_df(video_id)
+    comments= get_comments_df(video_id)
 
     comments_relevant_df = predicted_df(0,30,comments,tran)
     comment_list = []
