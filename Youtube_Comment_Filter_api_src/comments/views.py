@@ -3,7 +3,7 @@ from django.shortcuts import render
 import numpy as np
 import pandas as pd
 
-from extractor.views import youtube_comment_Extractor, select_script_transcript
+from extractor.views import get_authenticated_service, get_comments_df, select_script_transcript
 from vectorizer.views import bow_transformer, tf_idf_transformer, tf_idf_transform
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -27,8 +27,8 @@ def predicted_df(start_time,add_time,comments,tran):
 
 
 def comments():
-    tran=
-    comments=
+    tran= select_script_transcript(video_id_input)
+    comments= get_comments_df(video_id_input)
 
     comments_relevant_df = predicted_df(0,30,comments,tran)
     comment_list = []
