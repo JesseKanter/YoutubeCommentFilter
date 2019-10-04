@@ -49,7 +49,8 @@ def get_authenticated_service():
 
 def get_comments_df(video_id_input):
 
-    query_results = service.videos().list(
+     
+    query_results = get_authenticated_service().videos().list(
             part = 'snippet',
             id = video_id_input,
             ).execute()
