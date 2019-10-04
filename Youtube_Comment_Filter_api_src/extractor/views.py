@@ -139,7 +139,7 @@ def get_comments_df(video_id_input):
 
     return pd.DataFrame(output_dict, columns = output_dict.keys())
 
-def select_script_transcript(video_id_input):
+def get_transcript_df(video_id_input):
     text=[]
     start=[]
     duration=[]
@@ -156,3 +156,17 @@ def select_script_transcript(video_id_input):
                 'duration': duration,
                 }    
     return pd.DataFrame(output_dict_tran, columns = output_dict_tran.keys())
+
+def select_script_transcript(start_time,added_time,tran):
+    #start_time=20
+    end_time=start_time+added_time
+    #a[0] <= b[0] <= a[1] or b[0] <= a[0] <= b[1]
+    #tran[((start_time<=tran['start'])&(tran['start']<=end_time))]
+    #tran[((tran['start']<=start_time)&(start_time<=tran['end']))]
+
+    transelection=tran[((start_time<=tran['start'])&(tran['start']<=end_time)) | ((tran['start']<=start_time)&(start_time<=tran['end']))]
+
+    transelection_text=''
+    for s in transelection.text:
+        transelection_text+=s+' '
+    return(transelection_text)
