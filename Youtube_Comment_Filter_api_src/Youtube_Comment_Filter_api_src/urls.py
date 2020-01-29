@@ -15,7 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
+from comments.views import comments
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+##urlpatterns += [
+##     url(r'^submission/$', recommender, name='submission'),
+## ]
+
+urlpatterns += [
+    url('submission/', include('comments.urls')),
+]
+
+
+##
+##from django.urls import include, path
+##
+##urlpatterns = [
+##    path('comments/', include('comments.urls')),
+##    path('admin/', admin.site.urls),
+##]

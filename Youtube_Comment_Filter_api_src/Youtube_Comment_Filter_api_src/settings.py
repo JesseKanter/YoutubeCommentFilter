@@ -30,6 +30,11 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# 10/06 3:43pm adding 'corsheaders' to Installedapps
+# adding 'corsheaders.middleware.CorsMiddleware', 'django.middleware.common.CommonMiddleware',
+# to MIddleware and then adding 'CORS_ORIGIN_ALLOW_ALL = TrueZ at end
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,11 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -73,13 +80,30 @@ WSGI_APPLICATION = 'Youtube_Comment_Filter_api_src.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+#########
+# for below I copied from arthur's github and just testing. imdeialty below and commented out is what was originailly here
+# changes go till 'here*' below
+
+##DATABASES = {
+##     'default': {
+##         'ENGINE': 'django.db.backends.sqlite3',
+##         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+##     }
+## }
+##
+DATABASES={
+    'default' : {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'USER':'jesse',
+        'PASSWORD':'chrome_insight',
+        'HOST':'67.80.163.144',
+        'PORT':'80',
     }
 }
 
+
+######## here*
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -118,3 +142,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CORS_ORIGIN_ALLOW_ALL = True
